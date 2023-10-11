@@ -1,19 +1,19 @@
 <?php header("Content-Type:text/html;charset='utf-8'"); // content="text/plain; charset=utf-8"
 /*************************************************************************
  * $Id: piec_csimex1.php,v 1.1.2.1 2003/10/09 21:05:39 aditus Exp $
- *  Пример кгрурговой дмаграммы с центральным кругом
+ *  Пример круговой диаграммы с центральным кругом
  *************************************************************************
  * Modified by sgiman @ 2023-10
  */
 require_once ('jpgraph/jpgraph.php');
 require_once ('jpgraph/jpgraph_pie.php');
 
-// Некоторые данные
+// --- DATA ---
 $data = array(50,28,25,27,31,20);
 $fileName = "imagefile.png";
 
-// Новая круговая диаграмма
-$graph = new PieGraph(450,450);
+// --- PIE GRAPF---
+$graph = new PieGraph(800,800);
 
 // Если вам не нужна граница, просто раскомментируйте эту строку
 // $graph->SetFrame(false);
@@ -21,12 +21,12 @@ $graph = new PieGraph(450,450);
 // Раскомментируйте эту строку, чтобы добавить тень к границе.
 // $graph->SetShadow();
 
-// Setup title
+// --- TITLE ---
 $graph->title->Set("CSIM Center Pie plot ex 1");
-$graph->title->SetFont(FF_ARIAL,FS_BOLD,18);
-$graph->title->SetMargin(8); // Add a little bit more margin from the top
+$graph->title->SetFont(FF_TREBUCHE,FS_BOLD,18);
+$graph->title->SetMargin(40); // Add a little bit more margin from the top
 
-// Создать круговую диаграмму
+// --- PIE PLOT (CIRCLE)
 $p1 = new PiePlotC($data);
 
 // Установить радиус круговой диаграммы (как часть размера изображения)
@@ -36,12 +36,12 @@ $p1->SetSize(0.32);
 $p1->SetCenter(0.5,0.45);
 
 // Настройка шрифта и цвета этикетки (label)
-$p1->value->SetFont(FF_ARIAL,FS_BOLD,12);
+$p1->value->SetFont(FF_ARIAL,FS_BOLD, 12);
 $p1->value->SetColor('white');
 
 // Установить заголовок в центральном круге
 $p1->midtitle->Set("Test mid\nRow 1\nRow 2");
-$p1->midtitle->SetFont(FF_ARIAL,FS_NORMAL,14);
+$p1->midtitle->SetFont(FF_TREBUCHE,FS_NORMAL,14);
 
 // Установить цвет для среднего круга
 $p1->SetMidColor('yellow');
@@ -74,9 +74,10 @@ $p1->SetCSIMTargets($targ,$alts);
 $p1->SetMidCSIM("piec_csimex1.php#7","Center");
 
 
-// Дабавить небольшой справочный текст на изображении.
+//--- INFO ---
+// Добавить небольшой справочный текст на изображении.
 $txt = new Text("Note: This is an example of image map. Hold\nyour mouse over the slices to see the values.\nThe URL just points back to this page");
-$txt->SetFont(FF_FONT1,FS_BOLD);
+$txt->SetFont(FF_TREBUCHE,FS_BOLD);
 $txt->SetPos(0.5,0.97,'center','bottom');
 $txt->SetBox('yellow','black');
 $txt->SetShadow();

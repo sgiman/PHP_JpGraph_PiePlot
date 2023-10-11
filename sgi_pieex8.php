@@ -11,13 +11,14 @@ require_once ('jpgraph/jpgraph_pie.php');
 $data = array(40,60,31,35);
 
 // Новая круговая диаграмма
-$graph = new PieGraph(250,200);
+$graph = new PieGraph(800,800);
 $graph->clearTheme();
-$graph->SetShadow();
+//$graph->SetShadow();
 
 // Задать заголовок
 $graph->title->Set("Adjusting the label pos");
-$graph->title->SetFont(FF_FONT1,FS_BOLD);
+$graph->title->SetFont(FF_TREBUCHE,FS_BOLD,24);
+$graph->title->SetMargin(40); // добавить отступ сверху
 
 // Установить круговой график
 $p1 = new PiePlot($data);
@@ -27,7 +28,7 @@ $p1->SetSize(0.4);
 $p1->SetCenter(0.5,0.52);
 
 // Устанавливаем метки срезов и перемещаем их на график
-$p1->value->SetFont(FF_FONT1,FS_BOLD);
+$p1->value->SetFont(FF_TREBUCHE,FS_NORMAL,12);
 $p1->value->SetColor("darkred");
 $p1->SetLabelPos(0.6);
 

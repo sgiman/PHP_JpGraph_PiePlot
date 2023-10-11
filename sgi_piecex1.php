@@ -1,48 +1,48 @@
 <?php header("Content-Type:text/html;charset='utf-8'"); // content="text/plain; charset=utf-8"
 /*************************************************************************
  *  piecex1.php
- *  Пример круговой дмаграммы с центральным кругом
+ *  Пример круговой диаграммы с центральным кругом
  *************************************************************************
  * Modified by sgiman @ 2023-10
  */
 require_once ('jpgraph/jpgraph.php');
 require_once ('jpgraph/jpgraph_pie.php');
 
-// Некоторые данные
+// --- DATA ---
 //$data = array(50,28,25,27,31,20);
 $data = array(2,1,1,2,3,18);
 $fileName = "imagefile.png";
 
-// Новая круговая диаграмма
-$graph = new PieGraph(300,300,'auto');
+// --- PIE GRAPH ---
+$graph = new PieGraph(800,800,'auto');
+$graph->clearTheme();
 
-// Задать заголовок
+// --- TITLE ---
 $graph->title->Set("Pie plot with center circle");
-$graph->title->SetFont(FF_ARIAL,FS_BOLD,14);
-$graph->title->SetMargin(8); // Add a little bit more margin from the top
+$graph->title->SetFont(FF_TREBUCHE,FS_BOLD,24);
+$graph->title->SetMargin(40); // Добавить отступ сверху
 
-// Создать круговой график
+// ---- PIE PLOT CIRCLE ---
 $p1 = new PiePlotC($data);
 
-// Установить масштаб круговой диаграммы
+// --- SIZE ---
 $p1->SetSize(0.32);
 
-// Установить цвет и фонт для маркеров (label)
-$p1->value->SetFont(FF_ARIAL,FS_BOLD,10);
+// --- MARKERS (FONT & COLOR) ---
+$p1->value->SetFont(FF_TREBUCHE,FS_BOLD,10);
 $p1->value->SetColor('black');
 
-// Задать заголовок в центре внутреннего круга
+// --- HEADER CENTRE (MID CIRCLE) ---
 $p1->midtitle->Set("Test mid\nRow 1\nRow 2");
-$p1->midtitle->SetFont(FF_ARIAL,FS_NORMAL,10);
+$p1->midtitle->SetFont(FF_TREBUCHE,FS_NORMAL,18);
 
-// Задать цвет для вонутреннего круга
+// --- COLOR FOR MID CIRCLE ---
 $p1->SetMidColor('yellow');
 
-// Используйте процентные значения в значениях легенды
-// (это также значение по умолчанию).
+// --- LEGEND TO % (default) ---
 $p1->SetLabelType(PIE_VALUE_PER);
 
-// Дабавить график в круговую диаграмму
+// --- ADD PLOT TO GRAPH ---
 $graph->Add($p1);
 
 // .. и отправить изображение в браузер

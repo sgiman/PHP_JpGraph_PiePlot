@@ -9,8 +9,8 @@ require_once ('jpgraph/jpgraph.php');
 require_once ('jpgraph/jpgraph_canvas.php');
 
 // Настройте базовый холст, с которым мы сможем работать
-$g = new CanvasGraph(400,300,'auto');
-$g->SetMargin(5,11,6,11);
+$g = new CanvasGraph(400,260,'auto');
+$g->SetMargin(5,5,5,5);
 //$g->SetShadow();
 //$g->SetMarginColor("teal");
 

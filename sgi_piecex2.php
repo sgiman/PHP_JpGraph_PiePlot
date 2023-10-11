@@ -1,18 +1,20 @@
 <?php header("Content-Type:text/html;charset='utf-8'"); // content="text/plain; charset=utf-8"
 /*************************************************************************
  *  $Id: piecex2.php,v 1.3.2.1 2003/08/19 20:40:12 aditus Exp $
- *  Пример кгруговой дмаграммы с центральным кругом
+ *  Пример кгруговой диаграммы с центральным кругом
  *************************************************************************
  * Modified by sgiman @ 2023-10
  */
 require_once ('jpgraph/jpgraph.php');
 require_once ('jpgraph/jpgraph_pie.php');
 
-// Некоторые данные
+// --- DATA ---
 $data = array(50,28,25,27,31,20);
+$fileName = "imagefile.png";
 
-// Новая круговая диаграмма
-$graph = new PieGraph(400,400,'auto');
+// --- PIE GRAPH ---
+$graph = new PieGraph(800,800,'auto');
+$graph->clearTheme();
 
 // Не отображать границу
 $graph->SetFrame(false);
@@ -20,31 +22,30 @@ $graph->SetFrame(false);
 // Раскомментируйте эту строку, чтобы добавить тень к границе
 // $graph->SetShadow();
 
-// Задать заголовок
+// --- TITLE ---
 $graph->title->Set("PiePlotC");
-$graph->title->SetFont(FF_ARIAL,FS_BOLD,18);
-$graph->title->SetMargin(8); // Add a little bit more margin from the top
+$graph->title->SetFont(FF_TREBUCHE,FS_BOLD,24);
+$graph->title->SetMargin(40); // добавить отступ сверху
 
-// Создать круговой график
+// --- PIE PLOT (CIRCLE) ---
 $p1 = new PiePlotC($data);
 
-// Задать размер круга
+// --- SIZE ---
 $p1->SetSize(0.35);
 
-// Настройка шрифта и цвета метки
-$p1->value->SetFont(FF_ARIAL,FS_BOLD,12);
+// FONT & COLOR FOR LABELS
+$p1->value->SetFont(FF_TREBUCHE,FS_BOLD,12);
 $p1->value->SetColor('white');
 
 $p1->value->Show();
 
-// Установить заголовок в центре окружности
+// --- CENTER HEADER (for mid circle)
 $p1->midtitle->Set("Test mid\nRow 1\nRow 2");
-$p1->midtitle->SetFont(FF_ARIAL,FS_NORMAL,14);
-
+$p1->midtitle->SetFont(FF_TREBUCHE,FS_NORMAL,14);
 // Set color for mid circle
-// Задать цвет для средней окружности
 $p1->SetMidColor('yellow');
 
+// --- LABEL TO % (default) ---
 // Использование процентных значений в значениях легенды (это также значение по умолчанию)
 $p1->SetLabelType(PIE_VALUE_PER);
 
@@ -68,4 +69,21 @@ $p1->ExplodeAll(15);
 $graph->Add($p1);
 
 // .. и отправить изображение в браузер
-$graph->Stroke();
+//$graph->Stroke();
+
+//------------------------------------------
+// Передать изображение в файл и в браузер
+//------------------------------------------
+// По умолчанию используется PNG,
+// поэтому используйте суффикс ".png"
+//$fileName = "/tmp/imagefile.png";
+$gdImgHandler = $graph->Stroke(_IMG_HANDLER);
+$graph->img->Stream($fileName);
+
+//------------------------------------------------
+// Отправляем его обратно в браузер
+// Обновить браузер принудительно:
+// <img src="myimagescript.php?dummy=\'.now().">
+//------------------------------------------------
+$graph->img->Headers();
+$graph->img->Stream();

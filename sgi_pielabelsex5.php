@@ -16,33 +16,36 @@ $labels = array("First\n(%.1f%%)",
                 "Sixth\n(%.1f%%)","Seventh\n(%.1f%%)");
 
 // Создать круговую диаграмму
-$graph = new PieGraph(300,300);
-$graph->SetShadow();
+$graph = new PieGraph(800,800);
+$graph->clearTheme();
+//$graph->SetShadow();
 
 // Задать заголовок для графика
 $graph->title->Set('String labels with values');
-$graph->title->SetFont(FF_VERDANA,FS_BOLD,12);
+$graph->title->SetFont(FF_TREBUCHE,FS_BOLD,24);
 $graph->title->SetColor('black');
+$graph->title->SetMargin(40);   // отступ сверху
 
 // Создать круговой график
 $p1 = new PiePlot($data);
 $p1->SetCenter(0.5,0.5);
 $p1->SetSize(0.3);
 
-// Setup the labels to be displayed
+// Настройка меток, которые будут отображаться
 $p1->SetLabels($labels);
 
-// Этот метод регулирует положение меток. Это дается в виде дробей
-// радиуса пирога. Значение < 1 поместит центр метки
-// внутри круговой диаграммы и значение >= 1 выведет центр метки за пределы круговой диаграммы.
-// Круг. По умолчанию метка располагается на отметке 0,5 в середине каждого среза.
+// Этот метод регулирует положение меток.
+// Это дается в виде дробей радиуса круговой диограммы.
+// Значение < 1 поместит центр метки внутри круговой диаграммы
+// и значение >= 1 выведет центр метки за пределы круговой диаграммы.
+// Круг: по умолчанию метка располагается на отметке 0,5 в середине каждого среза.
 $p1->SetLabelPos(1);
 
 // Настраиваем форматы меток и какое значение
 // мы хотим отображать (абсолютное) или процент.
 $p1->SetLabelType(PIE_VALUE_PER);
 $p1->value->Show();
-$p1->value->SetFont(FF_ARIAL,FS_NORMAL,9);
+$p1->value->SetFont(FF_TREBUCHE,FS_BOLD,16);
 $p1->value->SetColor('darkgray');
 
 // Добавить и отрисовать

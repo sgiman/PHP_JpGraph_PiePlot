@@ -25,7 +25,7 @@ for( $i=0; $i < $n; ++$i ) {
 
     $t->SetColor('black');
     $t->SetAlign('left','top');
-    $t->SetFont(FF_ARIAL,FS_NORMAL,11);
+    $t->SetFont(FF_ARIAL,FS_NORMAL,14);
     $t->SetBox();
     $t->SetParagraphAlign($palign[$i]);
     $t->Stroke($img, $x,$y);
